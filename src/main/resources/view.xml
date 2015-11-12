@@ -1,0 +1,36 @@
+<view>
+    <name>Openstack_Swift</name>
+    <label>Ambari view for statistics monitoring of Openstack Swift</label>
+    <version>1.0.0</version>
+
+    <parameter>
+        <name>AuthURL</name>
+        <description>Authorization URL for authenticating with Openstack Swift</description>
+        <required>true</required>
+    </parameter>
+    <parameter>
+        <name>Domain</name>
+        <description>Domain in Openstack Swift</description>
+        <required>true</required>
+    </parameter>
+    <parameter>
+        <name>Project</name>
+        <description>Project in Openstack Swift</description>
+        <required>true</required>
+    </parameter>
+    <parameter>
+        <name>User</name>
+        <description>User for authenticating with Openstack Swift</description>
+        <required>true</required>
+    </parameter>
+    <parameter>
+        <name>Password</name>
+        <description>Password for authenticating with Openstack Swift</description>
+        <required>true</required>
+    </parameter>
+    <parameter>
+        <name>Container</name>
+        <description>Container in Swift</description>
+        <required>false</required>
+    </parameter>
+</view>
