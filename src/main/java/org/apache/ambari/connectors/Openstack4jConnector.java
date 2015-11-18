@@ -3,8 +3,12 @@ package org.apache.ambari.connectors;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.model.common.Identifier;
 import org.openstack4j.model.storage.object.SwiftAccount;
+import org.openstack4j.model.storage.object.SwiftContainer;
 import org.openstack4j.openstack.OSFactory;
 import org.openstack4j.api.client.IOSClientBuilder.V3;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Openstack4jConnector implements SwiftConnector {
     private V3 clientBuilder;
@@ -26,5 +30,29 @@ public class Openstack4jConnector implements SwiftConnector {
         ObjectStorageService objectStorageService = getObjectStorageService();
 
         return objectStorageService.account().get();
+    }
+
+    public SwiftContainer getContainer(String containerName) {
+        ObjectStorageService objectStorageService = getObjectStorageService();
+
+        List<? extends SwiftContainer> containers = objectStorageService.containers().list();
+        for(SwiftContainer container: containers) {
+            if (container.getName().equals(containerName))
+                return container;
+        }
+        return null;
+    }
+
+    public List<String> getContainerNames() {
+        ObjectStorageService objectStorageService = getObjectStorageService();
+
+        List<String> containerNames = new ArrayList<String>();
+        List<? extends SwiftContainer> containers = objectStorageService.containers().list();
+
+        for(SwiftContainer container: containers) {
+            containerNames.add(container.getName());
+        }
+
+        return containerNames;
     }
 }
