@@ -45,7 +45,7 @@
                 </div>
             </div>
             <hr class="ng-scope" />
-            <div class="panel panel-default ng-scope" style="height: 500px">
+            <div class="panel panel-default ng-scope" style="overflow: auto">
                 <div class="panel-heading clearfix">
                     <h3 class="panel-title pull-left">Details</h3>
                 </div>
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <hr class="ng-scope" />
-            <div class="panel panel-default ng-scope" style="height: 300px">
+            <div class="panel panel-default ng-scope">
                 <div class="panel-heading clearfix">
                     <h3 class="panel-title pull-left">Details</h3>
                 </div>

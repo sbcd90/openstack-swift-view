@@ -6,24 +6,32 @@ import org.openstack4j.model.storage.object.SwiftAccount;
 import org.openstack4j.model.storage.object.SwiftContainer;
 import org.openstack4j.openstack.OSFactory;
 import org.openstack4j.api.client.IOSClientBuilder.V3;
+import org.openstack4j.api.client.IOSClientBuilder.V2;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Openstack4jConnector implements SwiftConnector {
-    private V3 clientBuilder;
+    private V3 clientBuilderV3;
+    private V2 clientBuilderV2;
 
-    public Openstack4jConnector(String authUrl, String domain, String project, String username, String password) {
+    public Openstack4jConnector(String authUrl, String domain, String project, String tenantName, String username, String password) {
         Identifier userDomainName = Identifier.byName(domain);
         Identifier projectName = Identifier.byName(project);
         Identifier projectDomainName = Identifier.byName(domain);
 
-        clientBuilder = OSFactory.builderV3().endpoint(authUrl).credentials(username, password, userDomainName).scopeToProject(projectName,
-                projectDomainName);
+        if(tenantName == null || tenantName.equals(""))
+            clientBuilderV3 = OSFactory.builderV3().endpoint(authUrl).credentials(username, password, userDomainName).scopeToProject(projectName,
+                    projectDomainName);
+        else
+            clientBuilderV2 = OSFactory.builder().endpoint(authUrl).credentials(username, password).tenantName(tenantName);
     }
 
     private ObjectStorageService getObjectStorageService() {
-        return clientBuilder.authenticate().objectStorage();
+        if(clientBuilderV3 != null)
+            return clientBuilderV3.authenticate().objectStorage();
+        else
+            return clientBuilderV2.authenticate().objectStorage();
     }
 
     public SwiftAccount getAccount() {

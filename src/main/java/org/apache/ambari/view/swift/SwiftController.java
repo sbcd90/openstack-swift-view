@@ -40,7 +40,7 @@ public class SwiftController {
     private SwiftConnector initializeSwiftConnection() {
         if(swiftCredentials != null) {
             SwiftConnector swiftConnector = new Openstack4jConnector(swiftCredentials.get("AuthURL"), swiftCredentials.get("Domain"),
-                                    swiftCredentials.get("Project"), swiftCredentials.get("User"), swiftCredentials.get("Password"));
+                                    swiftCredentials.get("Project"), swiftCredentials.get("Tenant Name"), swiftCredentials.get("User"), swiftCredentials.get("Password"));
 
 /**            SwiftConnector swiftConnector = new Openstack4jConnector("http://10.97.152.185:5000/v3", "d1", "p1", "u1", "secrete");*/
             return swiftConnector;
