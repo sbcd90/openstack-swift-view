@@ -19,3 +19,9 @@ Images
 ![alt text][configure]
 
 [configure]: https://github.com/sbcd90/openstack-swift-view/blob/master/img/Swift_Ambari1.PNG "Configuration page"
+
+- Monitor page ( for Monitoring different aspects of your Swift Cluster )
+
+![alt text][monitor]
+
+[monitor]: https://github.com/sbcd90/openstack-swift-view/blob/master/img/Swift_Ambari2.PNG "Monitor page"
