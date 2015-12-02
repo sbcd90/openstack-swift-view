@@ -103,14 +103,27 @@ public class SwiftController {
 
             Map<String, String> metadata = swiftContainer.getMetadata();
             String stringifyMetadata = "";
+            Long containerQuota = null;
+            Long containerBytesUsed = null;
             for (Map.Entry<String, String> entry : metadata.entrySet()) {
                 stringifyMetadata = stringifyMetadata + entry.getKey() + " : " + entry.getValue() + " &#13;&#10;";
+
+                if(entry.getKey().equals("X-Container-Meta-Quota-Bytes"))
+                    containerQuota = Long.parseLong(entry.getValue());
+                if(entry.getKey().equals("X-Container-Bytes-Used"))
+                    containerBytesUsed = Long.parseLong(entry.getValue());
             }
+
+            Long percentage = new Long(0);
+            if(containerQuota != null && containerBytesUsed != null)
+              percentage = ((containerQuota - containerBytesUsed) * 100 ) / containerQuota;
+
             model.addAttribute("containerMetadata", stringifyMetadata);
             model.addAttribute("containerCountOfMetadata", metadata.entrySet().size());
+            model.addAttribute("percentage", percentage);
         }
         else
-            model.addAttribute("containerVisible", "display: block");
+            model.addAttribute("containerVisible", "display: none");
     }
 
 }

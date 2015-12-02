@@ -135,7 +135,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Container Total size</label>
                                 <div class="col-sm-9">
-                                    <input disabled="disabled" type="text" class="form-control instancename-input" placeholder="Display Container size" value="${containerTotalSize}" />
+                                    <input disabled="disabled" type="text" class="form-control instancename-input" placeholder="Display Container size"  value="${containerTotalSize}" />
                                 </div>
                             </div>
                         </fieldset>
@@ -147,9 +147,28 @@
                                 </div>
                             </div>
                         </fieldset>
+                        <fieldset disabled="disabled">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Quota Empty</label>
+                                <div class="col-sm-9">
+                                    <input disabled="disabled" type="text" class="form-control instancename-input" placeholder="Display Quota Empty" value="${percentage}%" />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset disabled="disabled">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Quota consumed</label>
+                                <div class="col-sm-9">
+                                    <input id="quotaPercent" disabled="disabled" type="text" class="form-control instancename-input" placeholder="Display Quota Consumed"  style="background-color: red;" value="0" />
+                                </div>
+                            </div>
+                        </fieldset>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    document.getElementById("quotaPercent").style.borderRight = ( ( document.getElementById("quotaPercent").offsetWidth * ${percentage} ) / 100 ) + "px solid green";
+</script>
